@@ -1,6 +1,6 @@
-package Model;
+package com.example.christophe.weatherdemo.models;
 
-public class jsonHead {
+public class JsonHead {
 
     private java.util.List<List> list = null;
 

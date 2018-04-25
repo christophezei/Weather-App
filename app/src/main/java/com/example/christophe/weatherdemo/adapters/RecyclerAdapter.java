@@ -1,4 +1,4 @@
-package com.example.christophe.weatherdemo;
+package com.example.christophe.weatherdemo.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,19 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.christophe.weatherdemo.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import Model.Main;
-import Model.jsonHead;
-
-import static java.lang.System.load;
+import com.example.christophe.weatherdemo.models.JsonHead;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
 
-    private jsonHead WeatherInfo;
-    public RecyclerAdapter(jsonHead WeatherInfo ){
+    private JsonHead WeatherInfo;
+    public RecyclerAdapter(JsonHead WeatherInfo ){
         this.WeatherInfo=WeatherInfo;
     }
 

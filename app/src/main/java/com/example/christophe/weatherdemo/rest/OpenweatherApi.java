@@ -1,11 +1,8 @@
-package Interfaces;
+package com.example.christophe.weatherdemo.rest;
 
 
 
-import java.util.List;
-
-import Model.Main;
-import Model.jsonHead;
+import com.example.christophe.weatherdemo.models.JsonHead;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -13,9 +10,10 @@ import retrofit2.http.Query;
 public interface OpenweatherApi {
     @GET("data/2.5/forecast")
 
-    Call<jsonHead> getWeatherInfo(
+    Call<JsonHead> getWeatherInfo(
             @Query("q") String cityName,
             @Query("appid") String appid
     );
+
 
 }
