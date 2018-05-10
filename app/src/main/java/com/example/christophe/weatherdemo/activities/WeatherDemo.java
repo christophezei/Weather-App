@@ -40,7 +40,7 @@ public class WeatherDemo extends AppCompatActivity implements NavigationView.OnN
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerAdapter adapter;
     private OpenweatherApi openweatherApi;
-    private final static String API_KEY = "992eabcc63d60343e0bb8ebc03214ba2";
+    private final static String API_KEY = "";
     TextView readName;
     SharedPreferences usernameSharedPreferences;
     String  cityName="";
@@ -104,11 +104,11 @@ public class WeatherDemo extends AppCompatActivity implements NavigationView.OnN
         }
         /*end check if Api key exists*/
 
-        /*call retrofit weather Api*/
-        openweatherApi = ApiClient.getClient().create(OpenweatherApi.class);
+
 
         try {
-
+            /*call retrofit weather Api*/
+            openweatherApi = ApiClient.getClient().create(OpenweatherApi.class);
 
         /*check if network provider finds city if not take beirut as default*/
         if(cityName!=null)
@@ -116,6 +116,7 @@ public class WeatherDemo extends AppCompatActivity implements NavigationView.OnN
         else
             cityName="beirut";
         /*end*/
+
 
             Call<JsonHead> apiCall = openweatherApi.getWeatherInfo(cityName,API_KEY);
 
@@ -152,6 +153,24 @@ public class WeatherDemo extends AppCompatActivity implements NavigationView.OnN
 
     }
     /*end call retrofit weather Api*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        readName=(TextView)findViewById(R.id.textViewName);
+        usernameSharedPreferences=getApplication().getSharedPreferences("SaveName", MODE_PRIVATE);
+        String userName=usernameSharedPreferences.getString("Value","Data Not Found");
+        GetLocation getLocation=new GetLocation();
+        cityName =getLocation.checkPermissionAndGetLocation(WeatherDemo.this);
+        if(cityName!=null){
+            readName.setText("Hello "+userName+",here's the weather for "
+                    + cityName);
+        }else
+            readName.setText("Hello "+userName+",here's the weather for Beirut"
+            );
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
